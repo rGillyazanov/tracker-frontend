@@ -1,8 +1,5 @@
 import { Route } from '@angular/router';
 import { AuthComponent } from './feature/auth.component';
-import { ForgotPasswordComponent } from './feature/forgot-password/forgot-password.component';
-import { LoginComponent } from './feature/login/login.component';
-import { RegisterComponent } from './feature/register/register.component';
 
 export const authRoutes: Route[] = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -10,9 +7,27 @@ export const authRoutes: Route[] = [
     path: '',
     component: AuthComponent,
     children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
-      { path: 'forgot-password', component: ForgotPasswordComponent },
+      {
+        path: 'login',
+        loadComponent: () =>
+          import('./feature/login/login.component').then(
+            (m) => m.LoginComponent
+          ),
+      },
+      {
+        path: 'register',
+        loadComponent: () =>
+          import('./feature/register/register.component').then(
+            (m) => m.RegisterComponent
+          ),
+      },
+      {
+        path: 'forgot-password',
+        loadComponent: () =>
+          import('./feature/forgot-password/forgot-password.component').then(
+            (m) => m.ForgotPasswordComponent
+          ),
+      },
     ],
   },
 ];

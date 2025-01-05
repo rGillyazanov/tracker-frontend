@@ -1,41 +1,35 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { Button } from 'primeng/button';
 import { InputText } from 'primeng/inputtext';
-import { Checkbox } from 'primeng/checkbox';
-import { Password } from 'primeng/password';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Button } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'auth-login-form',
-  standalone: true,
+  selector: 'auth-forgot-password-form',
   imports: [
-    InputText,
-    Checkbox,
-    Password,
-    ReactiveFormsModule,
-    NgOptimizedImage,
+    CommonModule,
     Button,
+    InputText,
+    NgOptimizedImage,
+    ReactiveFormsModule,
     RouterLink,
   ],
-  templateUrl: './login-form.component.html',
-  styleUrl: './login-form.component.scss',
+  templateUrl: './forgot-password-form.component.html',
+  styleUrl: './forgot-password-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginFormComponent {
+export class ForgotPasswordFormComponent {
   formGroup = new FormGroup({
     email: new FormControl(null, [Validators.required]),
-    password: new FormControl(null, [Validators.required]),
-    remember: new FormControl(false),
   });
 
-  login(): void {
+  submit(): void {
     console.log(this.formGroup.value);
   }
 }

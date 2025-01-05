@@ -114,7 +114,7 @@ export class ThemeManagerService {
 
     this._messageService.add({
       severity: 'success',
-      summary: 'Успех',
+      summary: 'Успешно',
       detail: `Цвет темы успешно изменен на "${this.colorTranslationsMapper[color]}"`,
       life: 5000,
     });

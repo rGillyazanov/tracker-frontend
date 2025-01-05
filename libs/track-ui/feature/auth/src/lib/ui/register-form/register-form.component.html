@@ -1,1 +1,50 @@
-<p>register-form works!</p>
+<div class="px-6 py-20 md:px-12 lg:px-20">
+  <div class="bg-white p-6 shadow rounded-border w-full lg:w-1/2 mx-auto">
+    <div class="flex justify-center">
+      <img ngSrc="assets/stickers/gosha/hi-2.png" alt="Привет" height="128" width="128" class="mb-4" loading="eager" />
+    </div>
+    <div class="text-center mb-8">
+      <div class="text-surface-900 text-3xl font-medium mb-4">Регистрация</div>
+      <span class="text-surface-600 font-medium leading-normal">У вас есть учетной записи?</span>
+      <a routerLink="/auth/login" class="font-medium no-underline ml-2 text-primary cursor-pointer">Войдите!</a>
+    </div>
+
+    <form [formGroup]="formGroup" (ngSubmit)="submit()">
+      <label for="name" class="text-surface-900 font-medium mb-2 block">Имя</label>
+      <input pInputText formControlName="name" id="name" type="text" placeholder="Ваше имя" class="w-full mb-4" />
+
+      <label for="email" class="text-surface-900 font-medium mb-2 block">Электронная почта</label>
+      <input pInputText formControlName="email" id="email" type="text" placeholder="Адрес электронной почты" class="w-full mb-4" />
+
+      <div class="flex flex-col mb-4">
+        <label for="password1" class="text-surface-900 font-medium mb-2 block">Пароль</label>
+        <p-password
+          formControlName="password"
+          inputId="password1"
+          ariaLabel="Password"
+          autocomplete="off"
+          [fluid]="true"
+          [toggleMask]="true"
+          [feedback]="false"
+          placeholder="Пароль"
+        />
+      </div>
+
+      <div class="flex flex-col mb-12">
+        <label for="confirm_password" class="text-surface-900 font-medium mb-2 block">Подтвердите пароль</label>
+        <p-password
+          formControlName="confirm_password"
+          inputId="confirm_password"
+          ariaLabel="Confirm Password"
+          autocomplete="off"
+          [fluid]="true"
+          [toggleMask]="true"
+          [feedback]="false"
+          placeholder="Подтвердите пароль"
+        />
+      </div>
+
+      <p-button type="submit" label="Зарегистрироваться" icon="pi pi-user-plus" [fluid]="true" />
+    </form>
+  </div>
+</div>

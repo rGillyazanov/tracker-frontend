@@ -6,7 +6,7 @@
     <div class="text-center mb-8">
       <div class="text-surface-900 text-3xl font-medium mb-4">Добро пожаловать</div>
       <span class="text-surface-600 font-medium leading-normal">У вас нет учетной записи?</span>
-      <a class="font-medium no-underline ml-2 text-primary cursor-pointer">Создайте!</a>
+      <a routerLink="/auth/register" class="font-medium no-underline ml-2 text-primary cursor-pointer">Создайте!</a>
     </div>
 
     <form [formGroup]="formGroup" (ngSubmit)="login()">
@@ -32,10 +32,10 @@
           <p-checkbox formControlName="remember" [binary]="true" inputId="rememberMe" class="flex mr-2" ariaLabel="Запомнить меня" />
           <label for="rememberMe" class="cursor-pointer">Запомнить меня</label>
         </div>
-        <a class="font-medium no-underline ml-2 text-primary text-right cursor-pointer">Забыли пароль?</a>
+        <a routerLink="/auth/forgot-password" class="font-medium no-underline ml-2 text-primary text-right cursor-pointer">Забыли пароль?</a>
       </div>
 
-      <p-button type="submit" label="Войти" icon="pi pi-user" [fluid]="true" />
+      <p-button type="submit" label="Войти" icon="pi pi-sign-in" [fluid]="true" />
     </form>
   </div>
 </div>
