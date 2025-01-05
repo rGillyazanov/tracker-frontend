@@ -20,6 +20,11 @@
           {
             "glob": "**/*",
             "input": "apps/track-ui/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "libs/assets/src",
+            "output": "assets"
           }
         ],
         "styles": ["apps/track-ui/src/styles.scss"],

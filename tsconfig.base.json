@@ -14,7 +14,14 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@tracker/assets": ["libs/assets/src/index.ts"],
+      "@tracker/auth": ["libs/track-ui/feature/auth/src/index.ts"],
+      "@tracker/drawer": ["libs/track-ui/feature/ui-settings/src/index.ts"],
+      "@tracker/feature-auth": ["libs/track-ui/feature-auth/src/index.ts"],
+      "@tracker/not-found": ["libs/track-ui/feature/not-found/src/index.ts"],
+      "@tracker/prime-ng-config": ["libs/core/prime-ng/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

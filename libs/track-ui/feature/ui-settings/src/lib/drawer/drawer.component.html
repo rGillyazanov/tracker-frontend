@@ -1,0 +1,71 @@
+<p-drawer
+  [(visible)]="visible"
+  [closable]="false"
+  [blockScroll]="true"
+  variant="filled"
+  transitionOptions="300ms cubic-bezier(0, 0, 0.2, 1)"
+  styleClass="!w-96"
+  (onHide)="visible.set(false)"
+  position="right">
+  <ng-template #header>
+    <div class="flex items-center gap-x-8">
+      <img ngSrc="assets/stickers/gosha/hm.png" height="96" width="96" loading="lazy" alt="Хм, настройки">
+      <h2 class="text-xl font-medium">Настройки приложения</h2>
+    </div>
+  </ng-template>
+  <ng-template #content>
+    <p-floatlabel class="w-full" variant="in">
+      <p-select inputId="theme-color" [options]="colors()" [(ngModel)]="selectedColor" [fluid]="true">
+        <ng-template #selectedItem let-selectedOption>
+          @if (selectedOption) {
+            <div class="flex items-center gap-2">
+              <div class="rounded-full h-3 w-3" [class]="colorSelectedBackgroundClass()"></div>
+              <div>{{ colorTranslationsMapper()[selectedOption] }}</div>
+            </div>
+          }
+        </ng-template>
+        <ng-template let-color #item>
+          <div class="flex items-center gap-2">
+            <div class="rounded-full h-3 w-3" [class]="colorBackgroundClasses()[color]"></div>
+            <div>{{ colorTranslationsMapper()[color] }}</div>
+          </div>
+        </ng-template>
+        <ng-template #dropdownicon>
+          <i class="pi pi-palette"></i>
+        </ng-template>
+      </p-select>
+      <label for="theme-color">Выберите цвет</label>
+    </p-floatlabel>
+  </ng-template>
+  <ng-template #footer>
+    <div class="flex items-center gap-2">
+      <button
+        pButton
+        [fluid]="true"
+        icon="pi pi-check"
+        class="block"
+        (click)="applySettings()"
+        outlined>
+        Применить
+      </button>
+      <button
+        pButton
+        [fluid]="true"
+        icon="pi pi-times"
+        class="block"
+        severity="danger"
+        (click)="visible.set(false)"
+        text>
+        Закрыть
+      </button>
+    </div>
+  </ng-template>
+</p-drawer>
+
+<button
+  pButton
+  (click)="visible.set(true)"
+  [attr.aria-controls]="visible() ? 'drawer' : null"
+  [attr.aria-expanded]="visible()"
+  icon="pi pi-cog" class="text-lg">
+</button>
