@@ -11,6 +11,9 @@ import {
 } from '@angular/forms';
 import { Button } from 'primeng/button';
 import { RouterLink } from '@angular/router';
+import { Message } from 'primeng/message';
+import { EmailPattern } from '@tracker/validations';
+import { NGX_ERRORS_DECLARATIONS } from '@ngspot/ngx-errors';
 
 @Component({
   selector: 'auth-login-form',
@@ -23,6 +26,8 @@ import { RouterLink } from '@angular/router';
     NgOptimizedImage,
     Button,
     RouterLink,
+    Message,
+    NGX_ERRORS_DECLARATIONS,
   ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
@@ -30,7 +35,10 @@ import { RouterLink } from '@angular/router';
 })
 export class LoginFormComponent {
   formGroup = new FormGroup({
-    email: new FormControl(null, [Validators.required]),
+    email: new FormControl(null, [
+      Validators.required,
+      Validators.pattern(EmailPattern),
+    ]),
     password: new FormControl(null, [Validators.required]),
     remember: new FormControl(false),
   });

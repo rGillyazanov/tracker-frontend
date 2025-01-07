@@ -11,22 +11,25 @@ export const authRoutes: Route[] = [
         path: 'login',
         loadComponent: () =>
           import('./feature/login/login.component').then(
-            (m) => m.LoginComponent
+            (m) => m.LoginComponent,
           ),
+        title: 'Вход',
       },
       {
         path: 'register',
         loadComponent: () =>
           import('./feature/register/register.component').then(
-            (m) => m.RegisterComponent
+            (m) => m.RegisterComponent,
           ),
+        title: 'Регистрация',
       },
       {
         path: 'forgot-password',
         loadComponent: () =>
           import('./feature/forgot-password/forgot-password.component').then(
-            (m) => m.ForgotPasswordComponent
+            (m) => m.ForgotPasswordComponent,
           ),
+        title: 'Забыли пароль?',
       },
     ],
   },

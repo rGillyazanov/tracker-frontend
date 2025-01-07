@@ -9,6 +9,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { NGX_ERRORS_DECLARATIONS } from '@ngspot/ngx-errors';
+import { Message } from 'primeng/message';
+import { EmailPattern } from '@tracker/validations';
 
 @Component({
   selector: 'auth-forgot-password-form',
@@ -19,6 +22,8 @@ import { RouterLink } from '@angular/router';
     NgOptimizedImage,
     ReactiveFormsModule,
     RouterLink,
+    Message,
+    NGX_ERRORS_DECLARATIONS,
   ],
   templateUrl: './forgot-password-form.component.html',
   styleUrl: './forgot-password-form.component.scss',
@@ -26,7 +31,10 @@ import { RouterLink } from '@angular/router';
 })
 export class ForgotPasswordFormComponent {
   formGroup = new FormGroup({
-    email: new FormControl(null, [Validators.required]),
+    email: new FormControl(null, [
+      Validators.required,
+      Validators.pattern(EmailPattern),
+    ]),
   });
 
   submit(): void {

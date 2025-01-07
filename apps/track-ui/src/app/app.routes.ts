@@ -14,6 +14,7 @@ export const appRoutes: Route[] = [
     path: 'not-found',
     loadComponent: () =>
       import('@tracker/not-found').then((m) => m.NotFoundComponent),
+    title: 'Страница не найдена',
   },
   {
     path: '**',

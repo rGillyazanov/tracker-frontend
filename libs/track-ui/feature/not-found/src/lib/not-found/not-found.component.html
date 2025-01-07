@@ -1,1 +1,28 @@
-<span>404 not found</span>
+<div class="flex items-center justify-center h-screen w-full">
+  <div class="flex flex-col items-center">
+    <img
+      (mouseenter)="changeImage('assets/stickers/gosha/questions.png')"
+      (mouseleave)="changeImage('assets/stickers/gosha/sit.png')"
+      [ngSrc]="roflImage()"
+      alt="Не сутулься"
+      height="96"
+      width="96"
+      class="fixed bottom-0 left-0"
+      priority="high"
+    />
+    <h1 class="text-4xl font-bold text-surface-900"
+        [title]="translation()?.key !== 'ru' ? 'Страница не найдена на другом языке (' + translation()?.key + ')' : ''">
+      {{ translation()?.value }}
+    </h1>
+
+    <div class="h-[128px] w-[256px] my-8 relative">
+      @if (gifResource.isLoading()) {
+        <div class="flex items-center justify-center h-full">Грузим гифку...</div>
+      } @else {
+        <img [ngSrc]="gifUrl()" alt="Гифка" class="object-contain" fill>
+      }
+    </div>
+
+    <a routerLink="/" class="font-medium no-underline ml-2 text-primary cursor-pointer">Вернуться на главную</a>
+  </div>
+</div>
