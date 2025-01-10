@@ -26,7 +26,11 @@ export class AuthApiService {
     return this._http.post(`${environment.API_URL}/register`, data);
   }
 
-  login(data: { email: string; password: string }): Observable<any> {
+  login(data: {
+    email: string;
+    password: string;
+    remember: boolean;
+  }): Observable<any> {
     return this._http.post(`${environment.API_URL}/login`, data);
   }
 

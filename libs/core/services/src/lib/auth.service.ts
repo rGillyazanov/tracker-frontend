@@ -13,11 +13,12 @@ export class AuthService {
     private readonly _router: Router,
   ) {}
 
-  logIn(): void {
+  logIn(isRemember: boolean): void {
     this._cookieService.set(this.cookieName, 'true', {
-      expires: 5, // Дней
+      expires: isRemember ? 400 : 5, // Дней
       sameSite: 'Lax',
       path: '/',
+      secure: true,
     });
 
     this._router.navigate(['home']);

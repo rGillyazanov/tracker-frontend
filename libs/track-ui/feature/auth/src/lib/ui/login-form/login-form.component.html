@@ -34,16 +34,25 @@
           >
             Поле "Электронная почта" не соответствует заданному формату.
           </p-message>
+          <p-message
+            *ngxError="'apiError'"
+            severity="error"
+            variant="simple"
+            size="small"
+            class="inline-block mt-2"
+          >
+            {{ formGroup.get('email')?.getError('apiError') }}
+          </p-message>
         </div>
       </div>
 
       <div class="flex flex-col mb-4">
-        <label for="password1" class="text-surface-900 font-medium mb-2 block">Пароль</label>
+        <label for="password" class="text-surface-900 font-medium mb-2 block">Пароль</label>
         <div class="flex flex-col mb-4">
           <p-password
             formControlName="password"
-            inputId="password1"
-            ariaLabel="Password"
+            inputId="password"
+            ariaLabel="Пароль"
             autocomplete="on"
             [fluid]="true"
             [toggleMask]="true"
@@ -75,12 +84,24 @@
       </div>
 
       <p-button
+        [loading]="submitLoading()"
         [disabled]="formGroup.invalid"
         type="submit"
         label="Войти"
         icon="pi pi-sign-in"
         [fluid]="true"
       />
+
+      @if (errorMessage().error) {
+        <p-message
+          severity="error"
+          variant="outlined"
+          size="small"
+          class="inline-block mt-4"
+        >
+          {{ errorMessage().message }}
+        </p-message>
+      }
     </form>
   </div>
 </div>

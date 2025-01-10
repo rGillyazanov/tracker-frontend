@@ -1,5 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AuthApiService } from '@tracker/services';
 
 @Component({
   selector: 'lib-home',
@@ -8,4 +14,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent {}
+export class HomeComponent implements OnInit {
+  private readonly _authApiService = inject(AuthApiService);
+
+  ngOnInit(): void {
+    this._authApiService.getUser().subscribe(console.log);
+  }
+}
