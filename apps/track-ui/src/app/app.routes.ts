@@ -1,14 +1,21 @@
 import { Route } from '@angular/router';
+import { authGuardFn, nonAuthGuardFn } from '@tracker/guards';
 
 export const appRoutes: Route[] = [
   {
     path: '',
-    redirectTo: 'auth',
+    redirectTo: 'home',
     pathMatch: 'full',
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('@tracker/home').then((m) => m.homeRoutes),
+    canActivate: [authGuardFn],
   },
   {
     path: 'auth',
     loadChildren: () => import('@tracker/auth').then((m) => m.authRoutes),
+    canActivate: [nonAuthGuardFn],
   },
   {
     path: 'not-found',

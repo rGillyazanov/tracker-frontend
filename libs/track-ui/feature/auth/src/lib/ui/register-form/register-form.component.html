@@ -113,7 +113,7 @@
         <label for="confirm_password" class="text-surface-900 font-medium mb-2 block">Подтвердите пароль</label>
         <div class="flex flex-col">
           <p-password
-            formControlName="confirm_password"
+            formControlName="password_confirmation"
             inputId="confirm_password"
             ariaLabel="Подтвердите пароль"
             autocomplete="off"
@@ -123,7 +123,7 @@
             placeholder="Подтвердите пароль"
           />
 
-          <div ngxErrors="confirm_password">
+          <div ngxErrors="password_confirmation">
             <p-message
               *ngxError="'required'"
               severity="error"

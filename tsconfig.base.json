@@ -18,10 +18,15 @@
       "@tracker/assets": ["libs/assets/src/index.ts"],
       "@tracker/auth": ["libs/track-ui/feature/auth/src/index.ts"],
       "@tracker/drawer": ["libs/track-ui/feature/ui-settings/src/index.ts"],
+      "@tracker/environments": ["libs/environments/src/index.ts"],
       "@tracker/feature-auth": ["libs/track-ui/feature-auth/src/index.ts"],
+      "@tracker/guards": ["libs/core/guards/src/index.ts"],
+      "@tracker/home": ["libs/track-ui/feature/home/src/index.ts"],
+      "@tracker/interceptors": ["libs/core/interceptors/src/index.ts"],
       "@tracker/not-found": ["libs/track-ui/feature/not-found/src/index.ts"],
       "@tracker/pipes": ["libs/core/pipes/src/index.ts"],
       "@tracker/prime-ng-config": ["libs/core/prime-ng/src/index.ts"],
+      "@tracker/services": ["libs/core/services/src/index.ts"],
       "@tracker/validations": ["libs/core/utils/validations/src/index.ts"],
       "@tracker/wikiquote": ["libs/core/utils/wikiquote/src/index.ts"]
     }

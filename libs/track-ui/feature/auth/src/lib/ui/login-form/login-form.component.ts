@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
 import { Checkbox } from 'primeng/checkbox';
 import { Password } from 'primeng/password';
 import {
-  FormControl,
-  FormGroup,
   ReactiveFormsModule,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { Button } from 'primeng/button';
@@ -14,6 +14,7 @@ import { RouterLink } from '@angular/router';
 import { Message } from 'primeng/message';
 import { EmailPattern } from '@tracker/validations';
 import { NGX_ERRORS_DECLARATIONS } from '@ngspot/ngx-errors';
+import { AuthApiService, AuthService } from '@tracker/services';
 
 @Component({
   selector: 'auth-login-form',
@@ -34,16 +35,23 @@ import { NGX_ERRORS_DECLARATIONS } from '@ngspot/ngx-errors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFormComponent {
-  formGroup = new FormGroup({
-    email: new FormControl(null, [
+  private readonly _authApiService = inject(AuthApiService);
+  private readonly _authService = inject(AuthService);
+
+  formGroup = new UntypedFormGroup({
+    email: new UntypedFormControl(null, [
       Validators.required,
       Validators.pattern(EmailPattern),
     ]),
-    password: new FormControl(null, [Validators.required]),
-    remember: new FormControl(false),
+    password: new UntypedFormControl(null, [Validators.required]),
+    remember: new UntypedFormControl(false),
   });
 
   login(): void {
-    console.log(this.formGroup.value);
+    const request = this.formGroup.value;
+
+    this._authApiService.login(request).subscribe(() => {
+      this._authService.logIn();
+    });
   }
 }

@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Button } from 'primeng/button';
 import { InputText } from 'primeng/inputtext';
 import { NgOptimizedImage } from '@angular/common';
 import { Password } from 'primeng/password';
 import {
-  FormControl,
-  FormGroup,
   ReactiveFormsModule,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
   EmailPattern,
   matchValidator,
@@ -17,6 +17,7 @@ import {
 } from '@tracker/validations';
 import { NGX_ERRORS_DECLARATIONS } from '@ngspot/ngx-errors';
 import { Message } from 'primeng/message';
+import { AuthApiService } from '@tracker/services';
 
 @Component({
   selector: 'auth-register-form',
@@ -34,29 +35,43 @@ import { Message } from 'primeng/message';
   templateUrl: './register-form.component.html',
   styleUrl: './register-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [AuthApiService],
 })
 export class RegisterFormComponent {
-  formGroup = new FormGroup(
+  private readonly _authApiService = inject(AuthApiService);
+  private readonly _router = inject(Router);
+
+  formGroup = new UntypedFormGroup(
     {
-      name: new FormControl(null, [
+      name: new UntypedFormControl(null, [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(50),
       ]),
-      email: new FormControl(null, [
+      email: new UntypedFormControl(null, [
         Validators.required,
         Validators.pattern(EmailPattern),
       ]),
-      password: new FormControl(null, [
+      password: new UntypedFormControl(null, [
         Validators.required,
         Validators.pattern(PasswordPattern),
       ]),
-      confirm_password: new FormControl(null, [Validators.required]),
+      password_confirmation: new UntypedFormControl(null, [
+        Validators.required,
+      ]),
     },
-    { validators: matchValidator('password', 'confirm_password') },
+    { validators: matchValidator('password', 'password_confirmation') },
   );
 
   submit(): void {
-    console.log(this.formGroup.value);
+    if (this.formGroup.invalid) {
+      return;
+    }
+
+    const request = this.formGroup.value;
+
+    this._authApiService.register(request).subscribe(() => {
+      this._router.navigate(['/auth/login']);
+    });
   }
 }
