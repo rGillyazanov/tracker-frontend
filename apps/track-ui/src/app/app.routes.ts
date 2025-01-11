@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { authGuardFn, nonAuthGuardFn } from '@tracker/guards';
+import { authGuardFn, nonAuthGuardFn } from '@tracker/core/guards';
 
 export const appRoutes: Route[] = [
   {
@@ -9,18 +9,22 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'home',
-    loadChildren: () => import('@tracker/home').then((m) => m.homeRoutes),
+    loadChildren: () =>
+      import('@tracker/apps/track-ui/home').then((m) => m.homeRoutes),
     canActivate: [authGuardFn],
   },
   {
     path: 'auth',
-    loadChildren: () => import('@tracker/auth').then((m) => m.authRoutes),
+    loadChildren: () =>
+      import('@tracker/apps/track-ui/auth').then((m) => m.authRoutes),
     canActivate: [nonAuthGuardFn],
   },
   {
     path: 'not-found',
     loadComponent: () =>
-      import('@tracker/not-found').then((m) => m.NotFoundComponent),
+      import('@tracker/apps/track-ui/not-found').then(
+        (m) => m.NotFoundComponent,
+      ),
     title: 'Страница не найдена',
   },
   {

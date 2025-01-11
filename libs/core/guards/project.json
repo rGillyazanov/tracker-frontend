@@ -1,5 +1,5 @@
 {
-  "name": "guards",
+  "name": "core-guards",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/core/guards/src",
   "prefix": "lib",

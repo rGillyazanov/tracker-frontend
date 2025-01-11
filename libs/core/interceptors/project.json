@@ -1,5 +1,5 @@
 {
-  "name": "interceptors",
+  "name": "core-interceptors",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/core/interceptors/src",
   "prefix": "lib",

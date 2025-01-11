@@ -1,0 +1,13 @@
+{
+  "name": "track-ui-feature-auth",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/track-ui/feature/auth/src",
+  "prefix": "auth",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

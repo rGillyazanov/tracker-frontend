@@ -2,14 +2,15 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { provideNgxErrorsConfig } from '@ngspot/ngx-errors';
-import { primeNgConfig } from '@tracker/prime-ng-config';
+import { primeNgConfig } from '@tracker/core/configs';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
   authInterceptor,
   credentialsInterceptor,
   sanctumInterceptor,
   xsrfInterceptor,
-} from '@tracker/interceptors';
+} from '@tracker/core/interceptors';
+import { storeConfig } from './configs/store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,5 +29,6 @@ export const appConfig: ApplicationConfig = {
       showMaxErrors: 1,
     }),
     primeNgConfig(),
+    storeConfig(),
   ],
 };

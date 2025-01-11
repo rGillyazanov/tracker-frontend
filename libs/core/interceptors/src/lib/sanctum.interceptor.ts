@@ -1,7 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { catchError, switchMap, throwError } from 'rxjs';
 import { inject } from '@angular/core';
-import { AuthApiService } from '@tracker/services';
+import { AuthApiService } from '@tracker/core/services';
 
 let csrfInitialized = false;
 

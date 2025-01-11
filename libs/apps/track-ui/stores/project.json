@@ -1,7 +1,7 @@
 {
-  "name": "core-utils-validations",
+  "name": "track-ui-stores",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/core/utils/validations/src",
+  "sourceRoot": "libs/apps/track-ui/stores/src",
   "prefix": "lib",
   "projectType": "library",
   "tags": [],
