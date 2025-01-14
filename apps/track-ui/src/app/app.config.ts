@@ -3,15 +3,10 @@ import { provideRouter } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { provideNgxErrorsConfig } from '@ngspot/ngx-errors';
 import { primeNgConfig } from '@tracker/core/configs';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import {
-  authInterceptor,
-  credentialsInterceptor,
-  sanctumInterceptor,
-  xsrfInterceptor,
-} from '@tracker/core/interceptors';
+import { provideHttpClient } from '@angular/common/http';
 import { storeConfig } from './configs/store';
 import { MessageService } from 'primeng/api';
+import interceptors from './configs/interceptors';
 
 const rootServices = [MessageService];
 
@@ -19,14 +14,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     ...rootServices,
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideHttpClient(
-      withInterceptors([
-        credentialsInterceptor,
-        sanctumInterceptor,
-        xsrfInterceptor,
-        authInterceptor,
-      ]),
-    ),
+    provideHttpClient(interceptors()),
     provideRouter(appRoutes),
     provideNgxErrorsConfig({
       showErrorsWhenInput: 'dirty',

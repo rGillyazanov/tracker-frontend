@@ -20,7 +20,6 @@ import { RouterLink } from '@angular/router';
 import { Message } from 'primeng/message';
 import { EmailPattern } from '@tracker/utils/validations';
 import { NGX_ERRORS_DECLARATIONS } from '@ngspot/ngx-errors';
-import { AuthService } from '@tracker/core/services';
 import { Store } from '@ngxs/store';
 import { LoginAction } from '@tracker/apps/track-ui/stores';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -51,7 +50,6 @@ interface LoginFormValue {
 })
 export class LoginFormComponent {
   private readonly _destroyRef = inject(DestroyRef);
-  private readonly _authService = inject(AuthService);
   private readonly _store = inject(Store);
 
   submitLoading = signal<boolean>(false);
@@ -88,7 +86,6 @@ export class LoginFormComponent {
       .subscribe({
         next: () => {
           this.submitLoading.set(false);
-          this._authService.logIn(request.remember);
         },
         error: () => {
           this.submitLoading.set(false);
