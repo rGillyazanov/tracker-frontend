@@ -37,6 +37,7 @@
       "@tracker/core/configs": ["libs/configs/src/index.ts"],
       "@tracker/core/guards": ["libs/core/guards/src/index.ts"],
       "@tracker/core/interceptors": ["libs/core/interceptors/src/index.ts"],
+      "@tracker/core/models": ["libs/core/models/src/index.ts"],
       "@tracker/core/pipes": ["libs/core/pipes/src/index.ts"],
       "@tracker/core/services": ["libs/core/services/src/index.ts"],
       "@tracker/environments": ["libs/environments/src/index.ts"],

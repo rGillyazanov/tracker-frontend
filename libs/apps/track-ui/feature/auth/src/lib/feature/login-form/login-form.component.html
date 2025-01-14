@@ -91,17 +91,6 @@
         icon="pi pi-sign-in"
         [fluid]="true"
       />
-
-      @if (errorMessage().error) {
-        <p-message
-          severity="error"
-          variant="outlined"
-          size="small"
-          class="inline-block mt-4"
-        >
-          {{ errorMessage().message }}
-        </p-message>
-      }
     </form>
   </div>
 </div>

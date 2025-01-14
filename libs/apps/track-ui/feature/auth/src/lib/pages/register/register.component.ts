@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RegisterFormComponent } from '../../ui/register-form/register-form.component';
+import { RegisterFormComponent } from '../../feature/register-form/register-form.component';
 
 @Component({
   selector: 'auth-register',

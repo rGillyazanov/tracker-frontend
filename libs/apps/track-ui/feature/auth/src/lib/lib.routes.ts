@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { AuthComponent } from './feature/auth.component';
+import { AuthComponent } from './pages/auth.component';
 
 export const authRoutes: Route[] = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -10,15 +10,13 @@ export const authRoutes: Route[] = [
       {
         path: 'login',
         loadComponent: () =>
-          import('./feature/login/login.component').then(
-            (m) => m.LoginComponent,
-          ),
+          import('./pages/login/login.component').then((m) => m.LoginComponent),
         title: 'Вход',
       },
       {
         path: 'register',
         loadComponent: () =>
-          import('./feature/register/register.component').then(
+          import('./pages/register/register.component').then(
             (m) => m.RegisterComponent,
           ),
         title: 'Регистрация',
@@ -26,7 +24,7 @@ export const authRoutes: Route[] = [
       {
         path: 'forgot-password',
         loadComponent: () =>
-          import('./feature/forgot-password/forgot-password.component').then(
+          import('./pages/forgot-password/forgot-password.component').then(
             (m) => m.ForgotPasswordComponent,
           ),
         title: 'Забыли пароль?',

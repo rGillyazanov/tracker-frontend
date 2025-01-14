@@ -1,7 +1,7 @@
 {
   "name": "track-ui-feature-not-found",
   "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/track-ui/feature/not-found/src",
+  "sourceRoot": "libs/apps/track-ui/feature/not-found/src",
   "prefix": "lib",
   "projectType": "library",
   "tags": [],

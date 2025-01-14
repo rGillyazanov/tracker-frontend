@@ -1,7 +1,7 @@
 {
   "name": "track-ui-feature-auth",
   "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/track-ui/feature/auth/src",
+  "sourceRoot": "libs/apps/track-ui/feature/auth/src",
   "prefix": "auth",
   "projectType": "library",
   "tags": [],

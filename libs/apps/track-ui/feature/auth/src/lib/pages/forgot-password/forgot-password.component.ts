@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ForgotPasswordFormComponent } from '../../ui/forgot-password-form/forgot-password-form.component';
+import { ForgotPasswordFormComponent } from '../../feature/forgot-password-form/forgot-password-form.component';
 
 @Component({
   selector: 'auth-forgot-password',

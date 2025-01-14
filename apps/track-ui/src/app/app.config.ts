@@ -11,9 +11,13 @@ import {
   xsrfInterceptor,
 } from '@tracker/core/interceptors';
 import { storeConfig } from './configs/store';
+import { MessageService } from 'primeng/api';
+
+const rootServices = [MessageService];
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    ...rootServices,
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(
       withInterceptors([

@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   inject,
   signal,
 } from '@angular/core';
@@ -19,8 +20,10 @@ import { RouterLink } from '@angular/router';
 import { Message } from 'primeng/message';
 import { EmailPattern } from '@tracker/utils/validations';
 import { NGX_ERRORS_DECLARATIONS } from '@ngspot/ngx-errors';
-import { AuthApiService, AuthService } from '@tracker/core/services';
-import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from '@tracker/core/services';
+import { Store } from '@ngxs/store';
+import { LoginAction } from '@tracker/apps/track-ui/stores';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 interface LoginFormValue {
   email: string;
@@ -47,8 +50,9 @@ interface LoginFormValue {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFormComponent {
-  private readonly _authApiService = inject(AuthApiService);
+  private readonly _destroyRef = inject(DestroyRef);
   private readonly _authService = inject(AuthService);
+  private readonly _store = inject(Store);
 
   submitLoading = signal<boolean>(false);
   errorMessage = signal<{ error: boolean; message: string }>({
@@ -78,28 +82,17 @@ export class LoginFormComponent {
 
     const request = this.formGroup.value as LoginFormValue;
 
-    this._authApiService.login(request).subscribe({
-      next: () => {
-        this.submitLoading.set(false);
-
-        this._authService.logIn(request.remember);
-      },
-      error: (err: HttpErrorResponse) => {
-        this.submitLoading.set(false);
-
-        if (err.status === 429) {
-          this.errorMessage.set({
-            error: true,
-            message:
-              'Слишком много попыток входа. Пожалуйста, попробуйте ещё раз позже.',
-          });
-        } else if (err.error?.message) {
-          this.errorMessage.set({
-            error: true,
-            message: err.error.message,
-          });
-        }
-      },
-    });
+    this._store
+      .dispatch(new LoginAction(request))
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: () => {
+          this.submitLoading.set(false);
+          this._authService.logIn(request.remember);
+        },
+        error: () => {
+          this.submitLoading.set(false);
+        },
+      });
   }
 }

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LoginFormComponent } from '../../ui/login-form/login-form.component';
+import { LoginFormComponent } from '../../feature/login-form/login-form.component';
 
 @Component({
   selector: 'auth-login',

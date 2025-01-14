@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   logOut(): void {
-    this._cookieService.delete(this.cookieName, '/', undefined, false, 'Lax');
+    this._cookieService.delete(this.cookieName, '/', undefined, true, 'Lax');
 
     this._router.navigate(['auth/login']);
   }
