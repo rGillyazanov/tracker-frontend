@@ -16,7 +16,9 @@ export const xsrfInterceptor: HttpInterceptorFn = (req, next) => {
 
   if (token !== null && !req.headers.has(headerName)) {
     req = req.clone({
-      headers: req.headers.set(headerName, token),
+      headers: req.headers
+        .set(headerName, token)
+        .set('Accept', 'application/json'),
     });
   }
 
