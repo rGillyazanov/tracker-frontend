@@ -36,7 +36,7 @@ export const errorsInterceptor: HttpInterceptorFn = (req, next) => {
       const message = errors[error.status] || {
         severity: 'error',
         summary: 'Ошибка',
-        detail: error.error.message,
+        detail: error.error.message || error.message || 'Неизвестная ошибка',
       };
 
       messageService.add({ ...message, life: 5000 });
