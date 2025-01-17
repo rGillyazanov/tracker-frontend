@@ -16,16 +16,14 @@ export class AuthService {
   logIn(isRemember: boolean): void {
     this._cookieService.set(this.cookieName, 'true', {
       expires: isRemember ? 400 : 5, // Дней
-      sameSite: 'Lax',
       path: '/',
-      secure: true,
     });
 
     this._router.navigate(['home']);
   }
 
   logOut(): void {
-    this._cookieService.delete(this.cookieName, '/', undefined, true, 'Lax');
+    this._cookieService.delete(this.cookieName, '/');
 
     this._router.navigate(['auth/login']);
   }
