@@ -18,3 +18,17 @@ export class LoginFailureAction {
 
   constructor(public error: HttpErrorResponse) {}
 }
+
+export class LogoutAction {
+  static readonly type = '[Auth] Logout';
+}
+
+export class LogoutSuccessAction {
+  static readonly type = '[Auth] Logout Success';
+}
+
+export class LogoutFailureAction {
+  static readonly type = '[Auth] Logout Failure';
+
+  constructor(public error: HttpErrorResponse) {}
+}

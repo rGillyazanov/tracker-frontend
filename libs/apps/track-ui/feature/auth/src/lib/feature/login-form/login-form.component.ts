@@ -53,10 +53,6 @@ export class LoginFormComponent {
   private readonly _store = inject(Store);
 
   submitLoading = signal<boolean>(false);
-  errorMessage = signal<{ error: boolean; message: string }>({
-    error: false,
-    message: '',
-  });
 
   formGroup = new FormGroup({
     email: new FormControl('', {
@@ -71,12 +67,11 @@ export class LoginFormComponent {
   });
 
   login(): void {
-    this.submitLoading.set(true);
-    this.errorMessage.set({ error: false, message: '' });
-
     if (this.formGroup.invalid) {
       return;
     }
+
+    this.submitLoading.set(true);
 
     const request = this.formGroup.value as LoginFormValue;
 

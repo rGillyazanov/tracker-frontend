@@ -4,6 +4,9 @@ import {
   LoginAction,
   LoginFailureAction,
   LoginSuccessAction,
+  LogoutAction,
+  LogoutFailureAction,
+  LogoutSuccessAction,
 } from './auth.actions';
 import { AuthApiService, AuthService } from '@tracker/core/services';
 import { patch } from '@ngxs/store/operators';
@@ -63,6 +66,32 @@ export class AuthState implements NgxsOnInit {
   loginFailureAction(
     _: StateContext<AuthStateModel>,
     { error }: LoginFailureAction,
+  ) {
+    console.error(error);
+  }
+
+  @Action(LogoutAction)
+  logoutAction({ dispatch }: StateContext<AuthStateModel>) {
+    return this._authApiService.logout().pipe(
+      tap({
+        next: () => dispatch(new LogoutSuccessAction()),
+        error: (error: HttpErrorResponse) =>
+          dispatch(new LogoutFailureAction(error)),
+      }),
+    );
+  }
+
+  @Action(LogoutSuccessAction)
+  logoutSuccessAction({ setState }: StateContext<AuthStateModel>) {
+    this._authService.logOut();
+
+    setState(patch({ isAuth: false }));
+  }
+
+  @Action(LogoutFailureAction)
+  logoutFailureAction(
+    _: StateContext<AuthStateModel>,
+    { error }: LogoutFailureAction,
   ) {
     console.error(error);
   }

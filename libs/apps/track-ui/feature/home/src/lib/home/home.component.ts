@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  signal,
+} from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ConfirmationService } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
@@ -11,6 +17,9 @@ import { Button } from 'primeng/button';
 import { FloatLabel } from 'primeng/floatlabel';
 import { Select } from 'primeng/select';
 import { OverlayBadge } from 'primeng/overlaybadge';
+import { LogoutAction } from '@tracker/apps/track-ui/stores';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Store } from '@ngxs/store';
 
 @Component({
   selector: 'lib-home',
@@ -35,6 +44,9 @@ import { OverlayBadge } from 'primeng/overlaybadge';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
+  private readonly _destroyRef = inject(DestroyRef);
+  private readonly _store = inject(Store);
+
   navsTop = signal([
     { label: 'Главная', icon: 'pi pi-home', path: '/home' },
     { label: 'Команда', icon: 'pi pi-users', path: '/team' },
@@ -59,4 +71,22 @@ export class HomeComponent {
       name: 'Роснефть',
     },
   ]);
+
+  logoutLoading = signal<boolean>(false);
+
+  logout(): void {
+    this.logoutLoading.set(true);
+
+    this._store
+      .dispatch(new LogoutAction())
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: () => {
+          this.logoutLoading.set(false);
+        },
+        error: () => {
+          this.logoutLoading.set(false);
+        },
+      });
+  }
 }
