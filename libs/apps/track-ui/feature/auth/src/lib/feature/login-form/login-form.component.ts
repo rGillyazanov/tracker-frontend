@@ -55,11 +55,11 @@ export class LoginFormComponent {
   submitLoading = signal<boolean>(false);
 
   formGroup = new FormGroup({
-    email: new FormControl('', {
+    email: new FormControl('admin@corelab.team', {
       nonNullable: true,
       validators: [Validators.required, Validators.pattern(EmailPattern)],
     }),
-    password: new FormControl('', {
+    password: new FormControl('12345678test', {
       nonNullable: true,
       validators: [Validators.required],
     }),
