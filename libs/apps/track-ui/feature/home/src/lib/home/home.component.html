@@ -1,1 +1,89 @@
-<p>Home works!</p>
+<div class="relative flex gap-6 h-screen bg-surface-0 p-6">
+  <div
+    id="app-sidebar-14"
+    class="h-full hidden lg:block lg:static absolute left-0 top-0 py-4 pl-4 lg:p-0 z-50"
+  >
+    <div
+      class="w-[18rem] h-full flex flex-col bg-surface-50 rounded-2xl border border-surface-300">
+      <a
+        routerLink="home"
+        class="inline-flex items-center gap-3 px-6 py-4 cursor-pointer">
+        <span class="flex rounded-full justify-center items-center p-2 bg-surface-800">
+          <img ngSrc="assets/svg/Logo.svg" alt="Логотип" width="16" height="16" />
+        </span>
+        <span class="font-semibold text-surface-900">КорЛаб</span>
+      </a>
+      <div class="w-[calc(100%-3rem)] mx-auto h-[1px] bg-surface-200 px-6"></div>
+      <div class="p-6 flex flex-grow flex-col justify-between">
+        <ul class="flex flex-col gap-2 overflow-hidden">
+          @for (item of navsTop(); track item.label; let idx = $index) {
+            <li>
+              <a
+                [routerLink]="item.path"
+                routerLinkActive="bg-white text-surface-900 border-surface-300"
+                class="z-30 relative flex w-full items-center gap-3 px-3 py-2 rounded-lg cursor-pointer transition-all border text-surface-500 border-transparent"
+              >
+                <i [ngClass]="item.icon"></i>
+                <span class="flex-1 font-medium">{{ item.label }}</span>
+              </a>
+            </li>
+          }
+        </ul>
+
+        <ul class="flex flex-col gap-2 overflow-hidden">
+          @for (item of navsBottom(); track item.label; let idx = $index) {
+            <li>
+              <a
+                [routerLink]="item.path"
+                routerLinkActive="bg-white text-surface-900 border-surface-300"
+                class="z-30 relative flex w-full items-center gap-3 px-3 py-2 rounded-lg cursor-pointer transition-all border text-surface-500 border-transparent"
+              >
+                <i [ngClass]="item.icon"></i>
+                <span class="flex-1 font-medium">{{ item.label }}</span>
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+      <div class="w-[calc(100%-3rem)] mx-auto h-[1px] bg-surface-200 px-6"></div>
+      <a
+        routerLink="/profile"
+        class="flex items-center gap-x-4 p-6">
+        <p-avatar
+          image="https://gitlab.com/uploads/-/system/user/avatar/7125036/avatar.png?width=192"
+          size="large"
+          shape="circle"
+        />
+
+        <div class="flex flex-col gap-y-1">
+          <span class="text-surface-900 text-sm font-medium">Ruslan Gillyazanov</span>
+          <span class="text-surface-500 text-xs">Разработчик</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-1 flex flex-col gap-6">
+    <div
+      class="flex sm:items-center flex-wrap sm:flex-row flex-col justify-between gap-4">
+      <div class="flex flex-col gap-2">
+        <p-floatlabel class="w-full md:w-56" variant="on">
+          <p-select inputId="workspace" [options]="projects()" optionLabel="name" styleClass="w-full" variant="filled" />
+          <label for="workspace">Рабочее пространство</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <p-icon-field>
+          <p-inputicon class="pi pi-search" />
+          <input pInputText placeholder="Поиск" />
+        </p-icon-field>
+        <p-overlay-badge severity="danger" styleClass="!rounded-full !p-[4px] !bg-primary">
+          <p-button icon="pi pi-bell" outlined severity="secondary" />
+        </p-overlay-badge>
+      </div>
+    </div>
+    <div class="flex-1 border border-primary-300 rounded-xl border-dashed"></div>
+  </div>
+</div>
