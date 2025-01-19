@@ -1,34 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
   inject,
-  signal,
+  OnDestroy,
 } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
 import { Checkbox } from 'primeng/checkbox';
 import { Password } from 'primeng/password';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Button } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 import { Message } from 'primeng/message';
-import { EmailPattern } from '@tracker/utils/validations';
 import { NGX_ERRORS_DECLARATIONS } from '@ngspot/ngx-errors';
-import { Store } from '@ngxs/store';
-import { LoginAction } from '@tracker/apps/track-ui/stores';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-
-interface LoginFormValue {
-  email: string;
-  password: string;
-  remember: boolean;
-}
+import { LoginFormService } from './services/login-form.service';
 
 @Component({
   selector: 'auth-login-form',
@@ -46,45 +31,25 @@ interface LoginFormValue {
   ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
+  providers: [LoginFormService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginFormComponent {
-  private readonly _destroyRef = inject(DestroyRef);
-  private readonly _store = inject(Store);
+export class LoginFormComponent implements OnDestroy {
+  private readonly _loginFormService = inject(LoginFormService);
 
-  submitLoading = signal<boolean>(false);
+  submitLoading = this._loginFormService.submitLoading;
 
-  formGroup = new FormGroup({
-    email: new FormControl('admin@corelab.team', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.pattern(EmailPattern)],
-    }),
-    password: new FormControl('12345678test', {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    remember: new FormControl(false, { nonNullable: true }),
-  });
+  loginForm = this._loginFormService.loginForm;
+
+  get isInvalidForm(): boolean {
+    return this._loginFormService.isInvalidForm;
+  }
 
   login(): void {
-    if (this.formGroup.invalid) {
-      return;
-    }
+    this._loginFormService.login();
+  }
 
-    this.submitLoading.set(true);
-
-    const request = this.formGroup.value as LoginFormValue;
-
-    this._store
-      .dispatch(new LoginAction(request))
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe({
-        next: () => {
-          this.submitLoading.set(false);
-        },
-        error: () => {
-          this.submitLoading.set(false);
-        },
-      });
+  ngOnDestroy(): void {
+    this._loginFormService.reset();
   }
 }

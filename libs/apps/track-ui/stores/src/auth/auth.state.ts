@@ -38,7 +38,7 @@ export class AuthState implements NgxsOnInit {
     });
   }
 
-  @Action(LoginAction)
+  @Action(LoginAction, { cancelUncompleted: true })
   loginAction(
     { dispatch }: StateContext<AuthStateModel>,
     { body }: LoginAction,
@@ -70,7 +70,7 @@ export class AuthState implements NgxsOnInit {
     console.error(error);
   }
 
-  @Action(LogoutAction)
+  @Action(LogoutAction, { cancelUncompleted: true })
   logoutAction({ dispatch }: StateContext<AuthStateModel>) {
     return this._authApiService.logout().pipe(
       tap({

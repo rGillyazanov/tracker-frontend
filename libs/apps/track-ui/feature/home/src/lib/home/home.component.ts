@@ -20,6 +20,7 @@ import { OverlayBadge } from 'primeng/overlaybadge';
 import { LogoutAction } from '@tracker/apps/track-ui/stores';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngxs/store';
+import { Tooltip } from 'primeng/tooltip';
 
 @Component({
   selector: 'lib-home',
@@ -37,6 +38,7 @@ import { Store } from '@ngxs/store';
     FloatLabel,
     Select,
     OverlayBadge,
+    Tooltip,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -47,9 +49,28 @@ export class HomeComponent {
   private readonly _destroyRef = inject(DestroyRef);
   private readonly _store = inject(Store);
 
-  navsTop = signal([
+  navsTop = signal<
+    {
+      label: string;
+      icon: string;
+      path: string;
+      tooltip?: string;
+    }[]
+  >([
     { label: 'Главная', icon: 'pi pi-home', path: '/home' },
-    { label: 'Команда', icon: 'pi pi-users', path: '/team' },
+    {
+      label: 'Команда',
+      icon: 'pi pi-users',
+      path: '/team',
+      tooltip: 'Управление участниками рабочего пространства.',
+    },
+    {
+      label: 'Напоминания',
+      icon: 'pi pi-calendar',
+      path: '/notifications',
+      tooltip:
+        'Создание событий с уведомлением участника(ов) рабочего пространства.',
+    },
   ]);
 
   navsBottom = signal([

@@ -9,7 +9,7 @@
       <a routerLink="/auth/register" class="font-medium no-underline ml-2 text-primary cursor-pointer">Создайте!</a>
     </div>
 
-    <form [formGroup]="formGroup" (ngSubmit)="login()">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
       <label for="email" class="text-surface-900 font-medium mb-2 block">Электронная почта</label>
       <div class="flex flex-col mb-4">
         <input pInputText formControlName="email" id="email" type="email" placeholder="Адрес электронной почты"
@@ -41,7 +41,7 @@
             size="small"
             class="inline-block mt-2"
           >
-            {{ formGroup.get('email')?.getError('apiError') }}
+            {{ loginForm.get('email')?.getError('apiError') }}
           </p-message>
         </div>
       </div>
@@ -85,7 +85,7 @@
 
       <p-button
         [loading]="submitLoading()"
-        [disabled]="formGroup.invalid"
+        [disabled]="isInvalidForm"
         type="submit"
         label="Войти"
         icon="pi pi-sign-in"
