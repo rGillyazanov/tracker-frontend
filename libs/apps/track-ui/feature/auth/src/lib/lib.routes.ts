@@ -2,7 +2,11 @@ import { Route } from '@angular/router';
 import { AuthComponent } from './pages/auth.component';
 
 export const authRoutes: Route[] = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
   {
     path: '',
     component: AuthComponent,

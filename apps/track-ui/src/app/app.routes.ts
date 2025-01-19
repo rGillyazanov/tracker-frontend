@@ -9,8 +9,8 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'home',
-    loadChildren: () =>
-      import('@tracker/apps/track-ui/home').then((m) => m.homeRoutes),
+    loadComponent: () =>
+      import('@tracker/apps/track-ui/home').then((m) => m.HomeComponent),
     canActivate: [authGuardFn],
   },
   {
