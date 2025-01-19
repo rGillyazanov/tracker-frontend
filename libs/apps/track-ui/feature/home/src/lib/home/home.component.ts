@@ -6,7 +6,7 @@ import {
   signal,
 } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, PrimeIcons } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Avatar } from 'primeng/avatar';
@@ -53,20 +53,26 @@ export class HomeComponent {
     {
       label: string;
       icon: string;
+      iconColor?: string;
       path: string;
       tooltip?: string;
     }[]
   >([
-    { label: 'Главная', icon: 'pi pi-home', path: '/home' },
+    { label: 'Главная', icon: PrimeIcons.HOME, path: '/home' },
     {
-      label: 'Команда',
-      icon: 'pi pi-users',
+      label: 'Задачи',
+      icon: PrimeIcons.CHECK_CIRCLE,
+      path: '/tasks',
+    },
+    {
+      label: 'Участники',
+      icon: PrimeIcons.USERS,
       path: '/team',
       tooltip: 'Управление участниками рабочего пространства.',
     },
     {
       label: 'Напоминания',
-      icon: 'pi pi-calendar',
+      icon: PrimeIcons.CALENDAR,
       path: '/notifications',
       tooltip:
         'Создание событий с уведомлением участника(ов) рабочего пространства.',
@@ -76,7 +82,7 @@ export class HomeComponent {
   navsBottom = signal([
     {
       label: 'Настройки',
-      icon: 'pi pi-cog',
+      icon: PrimeIcons.COG,
       path: '/settings',
     },
   ]);
