@@ -13,7 +13,7 @@ import { Avatar } from 'primeng/avatar';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { InputText } from 'primeng/inputtext';
-import { Button, ButtonDirective, ButtonIcon } from 'primeng/button';
+import { Button, ButtonDirective } from 'primeng/button';
 import { FloatLabel } from 'primeng/floatlabel';
 import { Select } from 'primeng/select';
 import { OverlayBadge } from 'primeng/overlaybadge';
@@ -24,7 +24,6 @@ import { Tooltip } from 'primeng/tooltip';
 import { AvatarGroup } from 'primeng/avatargroup';
 import { Popover } from 'primeng/popover';
 import { InputGroup } from 'primeng/inputgroup';
-import { InputGroupAddon } from 'primeng/inputgroupaddon';
 
 @Component({
   selector: 'lib-home',
@@ -46,9 +45,7 @@ import { InputGroupAddon } from 'primeng/inputgroupaddon';
     AvatarGroup,
     Popover,
     InputGroup,
-    InputGroupAddon,
     ButtonDirective,
-    ButtonIcon,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
