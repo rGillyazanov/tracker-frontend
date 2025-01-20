@@ -13,7 +13,7 @@ import { Avatar } from 'primeng/avatar';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { InputText } from 'primeng/inputtext';
-import { Button } from 'primeng/button';
+import { Button, ButtonDirective, ButtonIcon } from 'primeng/button';
 import { FloatLabel } from 'primeng/floatlabel';
 import { Select } from 'primeng/select';
 import { OverlayBadge } from 'primeng/overlaybadge';
@@ -21,6 +21,10 @@ import { LogoutAction } from '@tracker/apps/track-ui/stores';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngxs/store';
 import { Tooltip } from 'primeng/tooltip';
+import { AvatarGroup } from 'primeng/avatargroup';
+import { Popover } from 'primeng/popover';
+import { InputGroup } from 'primeng/inputgroup';
+import { InputGroupAddon } from 'primeng/inputgroupaddon';
 
 @Component({
   selector: 'lib-home',
@@ -39,6 +43,12 @@ import { Tooltip } from 'primeng/tooltip';
     Select,
     OverlayBadge,
     Tooltip,
+    AvatarGroup,
+    Popover,
+    InputGroup,
+    InputGroupAddon,
+    ButtonDirective,
+    ButtonIcon,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -63,12 +73,6 @@ export class HomeComponent {
       label: 'Задачи',
       icon: PrimeIcons.CHECK_CIRCLE,
       path: '/tasks',
-    },
-    {
-      label: 'Участники',
-      icon: PrimeIcons.USERS,
-      path: '/team',
-      tooltip: 'Управление участниками рабочего пространства.',
     },
     {
       label: 'Напоминания',
@@ -98,6 +102,27 @@ export class HomeComponent {
       name: 'Роснефть',
     },
   ]);
+
+  members = [
+    {
+      name: 'Руслан Гиллязанов',
+      image: 'amyelsner.png',
+      email: 'r.gillyazanov@corelab.team',
+      role: 'Администратор',
+    },
+    {
+      name: 'Артем Лунцов',
+      image: 'bernardodominic.png',
+      email: 'a.lunzov@corelab.team',
+      role: 'Разработчик',
+    },
+    {
+      name: 'Булат Галиуллин',
+      image: 'ionibowcher.png',
+      email: 'b.galiullin@corelab.team',
+      role: 'Менеджер',
+    },
+  ];
 
   logoutLoading = signal<boolean>(false);
 
